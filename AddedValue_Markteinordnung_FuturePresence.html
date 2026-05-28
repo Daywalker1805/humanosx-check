@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Added Value · Markteinordnung</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #0f1419;
+    --mid: #3a4a5c;
+    --soft: #6b7c8d;
+    --rule: #d0dae3;
+    --bg: #f7f9fb;
+    --white: #ffffff;
+    --accent: #1a3d5c;
+    --warm: #c8440a;
+    --tag-bg: #eaf1f7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 40px 64px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 36px;
+  }
+  .header-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .header-left p {
+    font-size: 13px;
+    color: var(--soft);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 12px;
+    color: var(--soft);
+    line-height: 1.8;
+  }
+
+  /* INTRO */
+  .intro {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .intro strong { font-weight: 600; }
+
+  /* SECTION */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  /* SPLIT COMPARE */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .compare-col {
+    padding: 20px 22px;
+  }
+  .compare-col:first-child {
+    border-right: 1px solid var(--rule);
+    background: var(--white);
+  }
+  .compare-col:last-child {
+    background: #eaf3fb;
+  }
+  .compare-col h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .compare-col:first-child h3 { color: var(--soft); }
+  .compare-col:last-child h3 { color: var(--accent); }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .cr-label {
+    padding: 8px 12px;
+    background: var(--bg);
+    font-weight: 500;
+    color: var(--mid);
+    border-right: 1px solid var(--rule);
+    font-size: 12px;
+  }
+  .cr-fp {
+    padding: 8px 12px;
+    background: var(--white);
+    color: var(--mid);
+    border-right: 1px solid var(--rule);
+    font-size: 12px;
+  }
+  .cr-av {
+    padding: 8px 12px;
+    background: #eaf3fb;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .compare-table {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .ct-header {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  .ct-header div { padding: 10px 14px; }
+  .ct-header div:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.2); }
+
+  .ct-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+  }
+  .ct-row:nth-child(odd) { background: var(--white); }
+  .ct-row:nth-child(even) { background: var(--bg); }
+  .ct-row div { padding: 9px 14px; line-height: 1.5; }
+  .ct-row div:not(:last-child) { border-right: 1px solid var(--rule); }
+  .ct-row div:first-child { font-weight: 500; color: var(--mid); }
+  .ct-row div:last-child { color: var(--accent); font-weight: 500; }
+  .tag-high {
+    display: inline-block;
+    background: #fdecea;
+    color: #c0320a;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    margin-left: 4px;
+  }
+
+  /* GRID 2-col */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card ul li {
+    font-size: 12.5px;
+    color: var(--mid);
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .card ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--soft);
+  }
+  .card.danger ul li::before { color: var(--warm); }
+  .card.plus ul li::before { color: var(--accent); }
+
+  /* SPRACHE */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .lang-col {
+    padding: 18px 20px;
+  }
+  .lang-col:first-child {
+    border-right: 1px solid var(--rule);
+    background: var(--white);
+  }
+  .lang-col:last-child {
+    background: #eaf3fb;
+  }
+  .lang-col h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--soft);
+  }
+  .lang-col:last-child h3 { color: var(--accent); }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--mid);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin: 3px 3px 3px 0;
+    border: 1px solid var(--rule);
+  }
+  .tag.av {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* POSITIONEN */
+  .positions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .pos-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .pos-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .pos-body {
+    padding: 14px;
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+  .pos-body strong {
+    display: block;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 6px;
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+  }
+  .pos-risk {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--rule);
+    font-size: 11.5px;
+    color: var(--warm);
+  }
+
+  /* RED TEAM */
+  .redteam {
+    background: #fff8f6;
+    border: 1px solid #f0c4b4;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .redteam h2 { color: var(--warm); }
+  .redteam ol {
+    padding-left: 18px;
+    margin-top: 10px;
+  }
+  .redteam ol li {
+    font-size: 13px;
+    color: var(--mid);
+    padding: 5px 0;
+    line-height: 1.55;
+  }
+
+  /* VERDICT */
+  .verdict {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .verdict-item h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .verdict-item p {
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.95;
+  }
+  .verdict-item .vt {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    font-size: 11.5px;
+    color: var(--soft);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mb { margin-bottom: 32px; }
+  .mb-sm { margin-bottom: 16px; }
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Added Value · Markteinordnung</h1>
+      <p>Future Presence als Benchmark, Wettbewerber und Spiegel</p>
+    </div>
+    <div class="header-right">
+      Internes Arbeitsdokument<br>
+      Mai 2026 · Saber Romdhani<br>
+      Für Oliver Bargfeld & Anton Klees
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <strong>Worum geht es?</strong> Future Presence (futurepresence.de) ist ein Anbieter im selben Problemraum wie Added Value: KI-Adoption, Führung, Governance, Routinen, Team-Enablement. Das Risiko liegt nicht darin, dass sie besser sind, sondern dass Added Value ohne scharfe eigene Sprache schnell ähnlich klingt. Dieses Dokument zeigt, wo wir uns überschneiden, wo wir uns differenzieren müssen und was wir lernen können.
+  </div>
+
+  <!-- KURZDIAGNOSE -->
+  <div class="section-label">01 · Kurzdiagnose</div>
+  <h2>Was ist Future Presence?</h2>
+
+  <div class="compare-table mb">
+    <div class="ct-header">
+      <div>Dimension</div>
+      <div>Future Presence</div>
+      <div>Added Value</div>
+    </div>
+    <div class="ct-row">
+      <div>Claim</div>
+      <div>Von KI-Pilot zu messbarem ROI</div>
+      <div>Übergänge von Unklarheit zu Handlungsfähigkeit</div>
+    </div>
+    <div class="ct-row">
+      <div>Zielgruppe</div>
+      <div>C-Level, HR, Transformation Leads, Teams</div>
+      <div>Führungsteams, Geschäftsführung, Entscheider</div>
+    </div>
+    <div class="ct-row">
+      <div>Angebotslogik</div>
+      <div>Readiness → Governance → Performance</div>
+      <div>Übergänge mit Liefer-Outcome</div>
+    </div>
+    <div class="ct-row">
+      <div>Sprache</div>
+      <div>Human-first, AI Empowerment, Future Skills</div>
+      <div>Entscheidung, Routinen, Verantwortungslogik</div>
+    </div>
+    <div class="ct-row">
+      <div>Formate</div>
+      <div>Vortrag, 1:1 Roadmap, Workshop</div>
+      <div>Module entlang konkreter Übergänge</div>
+    </div>
+    <div class="ct-row">
+      <div>Beweis</div>
+      <div>Kundenstimmen, White Paper, LinkedIn</div>
+      <div>Aufbauphase, erste Realfälle ausstehend</div>
+    </div>
+  </div>
+
+  <!-- ÜBERSCHNEIDUNG -->
+  <div class="section-label">02 · Überschneidungsfelder</div>
+  <h2>Wo sind wir direkte Nachbarn?</h2>
+
+  <div class="compare-table mb">
+    <div class="ct-header">
+      <div>Feld</div>
+      <div>Future Presence</div>
+      <div>Added Value · Überschneidung</div>
+    </div>
+    <div class="ct-row">
+      <div>KI-Adoption</div>
+      <div>Pilot zu Dauerbetrieb, ROI</div>
+      <div>Hoch <span class="tag-high">!</span></div>
+    </div>
+    <div class="ct-row">
+      <div>Führung</div>
+      <div>Executive Briefing, Roadmap</div>
+      <div>Hoch <span class="tag-high">!</span></div>
+    </div>
+    <div class="ct-row">
+      <div>Governance</div>
+      <div>Standards, Verantwortung, Leitplanken</div>
+      <div>Hoch <span class="tag-high">!</span></div>
+    </div>
+    <div class="ct-row">
+      <div>Team-Enablement</div>
+      <div>Human-AI-Collaboration, Workshops</div>
+      <div>Mittel bis hoch</div>
+    </div>
+    <div class="ct-row">
+      <div>Routinen & Standards</div>
+      <div>Nachhaltige Einführung, Human Oversight</div>
+      <div>Hoch <span class="tag-high">!</span></div>
+    </div>
+    <div class="ct-row">
+      <div>Personal Branding</div>
+      <div>mihaella.de: Sichtbarkeit, Skalierung</div>
+      <div>Kein Thema für Added Value</div>
+    </div>
+  </div>
+
+  <!-- DIFFERENZIERUNG -->
+  <div class="section-label">03 · Differenzierung</div>
+  <h2>Wo muss Added Value bewusst anders sein</h2>
+
+  <div class="grid2">
+    <div class="card plus">
+      <h3>Stärker spielen</h3>
+      <ul>
+        <li>Organisationsmechanik statt Befähigungssprache</li>
+        <li>Entscheidungsarchitektur als Kern</li>
+        <li>Mandatslogik statt Beratungsretainer</li>
+        <li>Liefer-Outcome statt ROI-Versprechen</li>
+        <li>Führungsteam als primäre Zielgruppe, nicht HR</li>
+        <li>Konkrete Übergangslogik statt Programmatik</li>
+      </ul>
+    </div>
+    <div class="card danger">
+      <h3>Bewusst vermeiden</h3>
+      <ul>
+        <li>„Human-first", „AI Empowerment", „Future Skills"</li>
+        <li>„Messbarer ROI" ohne belastbare Fallzahlen</li>
+        <li>Breite Versprechungen vor klarer Delivery</li>
+        <li>Personal-Brand-Logik in Added Value</li>
+        <li>Formatsprache (Workshop, Vortrag, Beratung)</li>
+        <li>Zu viele Servicelinien gleichzeitig</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SPRACHE -->
+  <div class="section-label">04 · Sprache</div>
+  <h2>Wie wir klingen müssen · und wie nicht</h2>
+
+  <div class="lang-grid mb">
+    <div class="lang-col">
+      <h3>Nicht übernehmen</h3>
+      <span class="tag">Human-first</span>
+      <span class="tag">AI Empowerment</span>
+      <span class="tag">Future Skills</span>
+      <span class="tag">High Performance</span>
+      <span class="tag">Transformation Journey</span>
+      <span class="tag">KI-Exzellenz</span>
+      <span class="tag">Nachhaltige KI</span>
+      <span class="tag">Messbarer ROI</span>
+      <span class="tag">Digital Health</span>
+    </div>
+    <div class="lang-col">
+      <h3>Added Value Sprache</h3>
+      <span class="tag av">Handlungsfähigkeit</span>
+      <span class="tag av">Entscheidungsbild</span>
+      <span class="tag av">Verantwortungslogik</span>
+      <span class="tag av">Übergang</span>
+      <span class="tag av">Offizielle Arbeitslogik</span>
+      <span class="tag av">Routinen</span>
+      <span class="tag av">Mandatsklarheit</span>
+      <span class="tag av">Liefer-Outcome</span>
+      <span class="tag av">Reale Bedingungen</span>
+    </div>
+  </div>
+
+  <!-- POSITIONIERUNGSRICHTUNGEN -->
+  <div class="section-label">05 · Positionierungsrichtungen</div>
+  <h2>Drei mögliche Richtungen für Added Value</h2>
+
+  <div class="positions mb">
+    <div class="pos-card">
+      <div class="pos-header">Richtung A</div>
+      <div class="pos-body">
+        <strong>Führung und Entscheidung</strong>
+        Added Value hilft Führungsteams, KI entscheidbar zu machen.
+        <div class="pos-risk">Risiko: zu strategisch, wenn keine Umsetzung folgt.</div>
+      </div>
+    </div>
+    <div class="pos-card">
+      <div class="pos-header">Richtung B · Empfohlen</div>
+      <div class="pos-body">
+        <strong>Offizielle KI-Arbeitslogik</strong>
+        Added Value bringt KI aus der Schattennutzung in verantwortbare Arbeitsroutinen.
+        <div class="pos-risk">Risiko: kann nach Governance klingen, wenn nicht pragmatisch genug.</div>
+      </div>
+    </div>
+    <div class="pos-card">
+      <div class="pos-header">Richtung C · Anschluss</div>
+      <div class="pos-body">
+        <strong>Vom Pilot zur Routine</strong>
+        Added Value übersetzt KI-Piloten in eingeführte Arbeitsweisen.
+        <div class="pos-risk">Risiko: braucht klare Delivery-Fähigkeit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RED TEAM -->
+  <div class="redteam">
+    <div class="section-label" style="color: #c0320a;">06 · Red Team</div>
+    <h2>5 harte Fragen an Added Value</h2>
+    <ol>
+      <li>Warum sollte ein Mittelständler Added Value wählen und nicht Future Presence, wenn beide über KI, Führung, Governance und Routinen sprechen?</li>
+      <li>Welche echte Delivery-Fähigkeit hat Added Value schon, jenseits von Konzept, Sprache und guter Diagnose?</li>
+      <li>Ist „Übergangslogik" für Kunden sofort verständlich oder nur intern stark?</li>
+      <li>Wo endet Sabers Urteil und wo beginnt wieder klassisches Training unter neuem Namen?</li>
+      <li>Welche drei Belege kann Added Value nach 90 Tagen zeigen, die nicht nur Gespräch, Konzept oder Event sind?</li>
+    </ol>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="section-label">07 · Einordnung</div>
+  <div class="verdict">
+    <div class="verdict-item">
+      <h3>Als Wettbewerber</h3>
+      <div class="vt">DIREKT</div>
+      <p>Bei AI Decision Briefing, KI offiziell machen, Governance-Workshops und Executive Roadmaps sind wir direkte Nachbarn. Dort muss Added Value schärfer geschnitten sein.</p>
+    </div>
+    <div class="verdict-item">
+      <h3>Als Benchmark</h3>
+      <div class="vt">NÜTZLICH</div>
+      <p>Ihr Dreischritt, ihre Problemsprache und ihre Marktpräsenz zeigen, was Kunden bereits kaufen. Daraus lernen, ohne zu kopieren.</p>
+    </div>
+    <div class="verdict-item">
+      <h3>Als Kooperationspartner</h3>
+      <div class="vt">MÖGLICH</div>
+      <p>Mihaela als Speakerin für KI&Currywurst Folge 01 ist stark. Sie bringt Resonanz ohne zu vereinnahmen. Klar trennen: Perspektive einladen, nicht Konkurrenz aufbauen.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Added Value Venture Lab · Internes Arbeitsdokument · Mai 2026</span>
+    <span>Nicht für externe Weitergabe</span>
+  </div>
+
+</div>
+</body>
+</html>
